@@ -71,15 +71,15 @@ After running `rails db:seed`, these accounts are available (usernames are store
 ![Home page](screenshots/home.png)
 
 ### Favorites
-![Favorites page](/store/screenshots/favorites.png)
+![Favorites page](screenshots/favorites.png)
 ### Wishlist
-![Wishlist page](/store/screenshots/wishlist.png)
+![Wishlist page](screenshots/wishlist.png)
 ### Checkout
-![Checkout page](/store/screenshots/checkout.png)
+![Checkout page](screenshots/checkout.png)
 ### Order Confirmation
-![Order Confirmation page](/store/screenshots/orderconfirmation.png)
+![Order Confirmation page](screenshots/orderconfirmation.png)
 ### Order
-![Order page](/store/screenshots/order.png)
+![Order page](screenshots/order.png)
 
 ## Known limitations
 
