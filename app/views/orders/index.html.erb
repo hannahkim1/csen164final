@@ -1,0 +1,33 @@
+<% content_for :title, admin? ? "All Orders" : "My Orders" %>
+
+<h1 id="catalog-heading"><%= admin? ? "All Orders (Admin)" : "My Orders" %></h1>
+
+<% if @orders.any? %>
+  <table class="order-items">
+    <thead>
+      <tr>
+        <th>Order #</th>
+        <% if admin? %><th>Customer</th><% end %>
+        <th>Date</th><th>Payment</th><th>Items</th><th>Total</th><th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.id %></td>
+          <% if admin? %><td><%= order.user&.username || order.name %></td><% end %>
+          <td><%= order.created_at.strftime("%b %-d, %Y") %></td>
+          <td><%= order.pay_type %></td>
+          <td><%= order.cartitems.sum(:quantity) %></td>
+          <td><%= order.total_price %></td>
+          <td><%= link_to "View", order %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% elsif admin? %>
+  <p class="no-reviews">No orders have been placed yet.</p>
+<% else %>
+  <p class="no-reviews">You haven't placed any orders yet.
+    <%= link_to "Browse products", products_path %>.</p>
+<% end %>

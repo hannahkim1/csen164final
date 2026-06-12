@@ -1,0 +1,33 @@
+<% content_for :title, "Edit review" %>
+
+<h1>Edit your review</h1>
+<h2><%= @review.product.name %></h2>
+
+<% if @review.errors.any? %>
+  <div class="form-errors">
+    <h3><%= pluralize(@review.errors.count, "error") %> prevented this review from being saved:</h3>
+    <ul>
+      <% @review.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: @review do |form| %>
+  <div>
+    <%= form.label :rating %><br>
+    <%= form.select :rating, (1..5).to_a, prompt: "Select a rating" %>
+  </div>
+  <div>
+    <%= form.label :comment %><br>
+    <%= form.text_area :comment, rows: 4 %>
+  </div>
+  <div>
+    <%= form.submit "Update review" %>
+  </div>
+<% end %>
+
+<div>
+  <%= link_to "Back to product", @review.product %>
+</div>

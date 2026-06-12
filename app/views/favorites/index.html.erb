@@ -1,0 +1,23 @@
+<% content_for :title, "My Favorites" %>
+
+<h1 id="catalog-heading">My Favorites</h1>
+
+<% if @favorites.any? %>
+  <div id="products">
+    <% @favorites.each do |product| %>
+      <div class="entry">
+        <%= image_tag(product.image, class: "product-image") %>
+        <h2><%= link_to product.name, product %></h2>
+        <p><%= product.description %></p>
+        <div class="price-line">
+          <span class="price"><%= product.price %></span>
+          <%= button_to "Add to Cart", cartitems_path(product_id: product.id) %>
+          <%= render "favorites/button", product: product %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="no-reviews">You haven't favorited any products yet.
+    <%= link_to "Browse products", products_path %>.</p>
+<% end %>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Store" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Store">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# include stylesheet files %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="<%= controller.controller_name %>">
+    <div id="banner">
+      <%= image_tag("logo.png") %>
+      <nav id="main-nav">
+        <%= link_to "Home", root_path, class: ("active" if current_page?(root_path)) %>
+        <% if logged_in? %>
+          <%= link_to "Favorites", favorites_path, class: ("active" if current_page?(favorites_path)) %>
+          <%= link_to "Wishlist", wishlist_items_path, class: ("active" if current_page?(wishlist_items_path)) %>
+          <%= link_to "Orders", orders_path, class: ("active" if current_page?(orders_path)) %>
+          <% if admin? %>
+            <%= link_to "Manage Products", products_path, class: ("active" if current_page?(products_path)) %>
+          <% end %>
+          <span class="who">Signed in as <%= current_user.username %></span>
+          <%= button_to "Log out", logout_path, method: :delete %>
+        <% else %>
+          <%= link_to "Log in", login_path, class: ("active" if current_page?(login_path)) %>
+          <%= link_to "Sign up", signup_path, class: ("active" if current_page?(signup_path)) %>
+        <% end %>
+      </nav>
+    </div>
+
+    <%# render %>
+    <% if notice %>
+      <p id="notice" class="flash flash-notice"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p id="alert" class="flash flash-alert"><%= alert %></p>
+    <% end %>
+
+    <div id="columns">
+      <div id="side">
+        <% if @cart %>
+          <%= render @cart %>
+        <% end %>
+      </div>
+      <div id="main">
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>

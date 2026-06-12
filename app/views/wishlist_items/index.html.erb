@@ -1,0 +1,24 @@
+<% content_for :title, "My Wishlist" %>
+
+<h1 id="catalog-heading">My Wishlist (Saved for Later)</h1>
+
+<% if @wishlist_items.any? %>
+  <div id="products">
+    <% @wishlist_items.each do |item| %>
+      <div class="entry">
+        <%= image_tag(item.product.image, class: "product-image") %>
+        <h2><%= link_to item.product.name, item.product %></h2>
+        <p><%= item.product.description %></p>
+        <div class="price-line">
+          <span class="price"><%= item.product.price %></span>
+          <span class="wishlist-qty">Qty: <%= item.quantity %></span>
+          <%= button_to "Move to cart", move_to_cart_wishlist_item_path(item), method: :post %>
+          <%= button_to "Remove", wishlist_item_path(item), method: :delete, class: "favorite-btn" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="no-reviews">Your wishlist is empty. Add items from your cart with "Save for later".
+    <%= link_to "Browse products", products_path %>.</p>
+<% end %>

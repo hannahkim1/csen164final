@@ -1,0 +1,355 @@
+/*
+ * Application-wide styles. Served as-is by Propshaft.
+ * Store theme: tan/gold banner, green company name, olive cart sidebar,
+ * blue catalog heading, single-column product list with image on the left.
+ */
+
+:root {
+    --banner-bg: #a3bf6f;
+    --sidebar-bg: #a3bf6f;
+    --company-green: #2e7d32;
+    --catalog-blue: #000;
+    --text: #2d261f;
+    --muted: #555;
+    --border: #cdc6b4;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #ffe4ec;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+    font-size: 15px;
+}
+
+a {
+    color: var(--catalog-blue);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- Banner ---------- */
+#banner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 1.5rem;
+    background: var(--banner-bg);
+    border-bottom: 2px solid #6f8f3f;
+}
+
+#banner img {
+    height: 40px;
+    width: auto;
+}
+
+#main-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    margin-left: auto;
+}
+
+#main-nav .who {
+    color: #4a4126;
+}
+
+#main-nav a.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* ---------- Product detail actions ---------- */
+.product-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0.75rem 0;
+}
+
+.admin-actions {
+    margin: 0.5rem 0 1rem;
+    font-size: 0.85rem;
+}
+
+/* ---------- Catalog rating ---------- */
+.catalog-rating {
+    margin: 0.2rem 0;
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.catalog-rating .stars {
+    color: #e0a800;
+    letter-spacing: 1px;
+}
+
+.catalog-rating .no-rating {
+    color: #999;
+    font-style: italic;
+}
+
+/* ---------- Flash messages ---------- */
+.flash {
+    margin: 0;
+    padding: 0.6rem 1.5rem;
+}
+
+.flash-notice {
+    background: #eef7ea;
+    color: #295c1d;
+}
+
+.flash-alert {
+    background: #fbeaea;
+    color: #9b1c1c;
+}
+
+/* ---------- Two-column layout ---------- */
+#columns {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    padding: 1rem 1.5rem;
+}
+
+#side {
+    flex: 0 0 200px;
+    background: var(--sidebar-bg);
+    padding: 0.75rem 0.9rem;
+    border-radius: 2px;
+}
+
+#main {
+    flex: 1;
+    min-width: 0;
+    padding-left: 1.25rem;
+    border-left: 1px solid var(--border);
+}
+
+/* ---------- Cart sidebar ---------- */
+.cart h2 {
+    margin: 0 0 0.6rem;
+    font-size: 1.1rem;
+    color: var(--text);
+}
+
+.cart-items {
+    list-style: none;
+    margin: 0 0 0.6rem;
+    padding: 0;
+}
+
+.cart-items li {
+    padding: 0.3rem 0;
+    font-size: 0.85rem;
+    line-height: 1.35;
+    border-bottom: 1px dotted #c4ba8a;
+}
+
+.cart-items button.save-later-btn {
+    margin-top: 0.2rem;
+    padding: 0.15rem 0.5rem;
+    font-size: 0.75rem;
+    background: #fff;
+}
+
+.wishlist-qty {
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.cart .total {
+    margin: 0.5rem 0 0.75rem;
+    font-weight: bold;
+}
+
+.cart .empty {
+    font-size: 0.9rem;
+    color: #4a4126;
+}
+
+.checkout-btn,
+.checkout-btn:hover {
+    display: inline-block;
+    padding: 0.35rem 0.9rem;
+    background: #ececec;
+    color: #222;
+    border: 1px solid #999;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    text-decoration: none;
+}
+
+/* ---------- Catalog heading ---------- */
+#catalog-heading {
+    margin: 0 0 0.5rem;
+    padding-bottom: 0.35rem;
+    color: var(--catalog-blue);
+    font-size: 1.5rem;
+    border-bottom: 2px dotted var(--catalog-blue);
+}
+
+/* ---------- Search form ---------- */
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.search-form input[type="search"] {
+    padding: 0.4rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    min-width: 220px;
+}
+
+.search-summary {
+    margin: 0 0 0.75rem;
+    font-style: italic;
+    color: #555;
+}
+
+/* ---------- Product list ---------- */
+#products .entry {
+    display: flow-root;
+    padding: 1rem 0;
+    border-bottom: 1px dotted #ccc;
+}
+
+#products .entry .product-image {
+    float: left;
+    width: 80px;
+    margin: 0 1.25rem 0.5rem 0;
+}
+
+#products .entry h2 {
+    margin: 0 0 0.4rem;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+#products .entry p {
+    margin: 0 0 0.6rem;
+    line-height: 1.5;
+    color: var(--muted);
+}
+
+.price-line {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+.price {
+    font-weight: bold;
+    color: var(--text);
+}
+
+/* ---------- Buttons & forms ---------- */
+button,
+input[type="submit"],
+.button_to button {
+    padding: 0.35rem 0.9rem;
+    background: #ececec;
+    color: #222;
+    border: 1px solid #999;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+button:hover,
+input[type="submit"]:hover,
+.button_to button:hover {
+    background: #e0e0e0;
+}
+
+.button_to {
+    display: inline-block;
+    margin: 0;
+}
+
+.favorite-btn {
+    background: #fff;
+    border-color: #c0392b;
+    color: #c0392b;
+}
+
+.favorite-btn:hover {
+    background: #fdecea;
+}
+
+.favorite-btn.favorited {
+    background: #c0392b;
+    color: #fff;
+}
+
+.favorite-btn.favorited:hover {
+    background: #a93226;
+}
+
+.button_to form {
+    margin: 0;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    padding: 0.4rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 0.95rem;
+    margin: 0.2rem 0 0.6rem;
+}
+
+#error_explanation {
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    background: #fbeaea;
+    border: 1px solid #e3b9b9;
+    border-radius: 4px;
+    color: #9b1c1c;
+}
+
+/* ---------- Tables (scaffold pages) ---------- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 0.6rem;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 760px) {
+    #columns {
+        flex-direction: column;
+    }
+
+    #side {
+        flex-basis: auto;
+        width: 100%;
+    }
+
+    #main {
+        border-left: 0;
+        padding-left: 0;
+    }
+}

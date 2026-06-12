@@ -1,0 +1,22 @@
+<div id="<%= dom_id cart %>" class="cart">
+  <h2>Shopper Cart</h2>
+
+  <% if cart.cartitems.any? %>
+    <ul class="cart-items">
+      <% cart.cartitems.each do |item| %>
+        <li>
+          <span class="cart-item-line"><%= item.product.name %> - <%= item.quantity %> - <%= item.product.price %></span>
+          <% if logged_in? %>
+            <%= button_to "Save for later", wishlist_items_path(cartitem_id: item.id), method: :post, class: "save-later-btn" %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+
+    <p class="total">Total price: <%= cart.total_price %></p>
+
+    <%= link_to "Check out", new_order_path, class: "checkout-btn" %>
+  <% else %>
+    <p class="empty">Your cart is empty.</p>
+  <% end %>
+</div>

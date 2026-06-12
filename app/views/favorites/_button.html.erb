@@ -1,0 +1,8 @@
+<% if logged_in? %>
+  <% favorite = current_user.favorite_for(product) %>
+  <% if favorite %>
+    <%= button_to "Remove from favorites", favorite_path(favorite), method: :delete, class: "favorite-btn favorited" %>
+  <% else %>
+    <%= button_to "Add to favorites", favorites_path(product_id: product.id), method: :post, class: "favorite-btn" %>
+  <% end %>
+<% end %>

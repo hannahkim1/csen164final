@@ -1,0 +1,45 @@
+<% content_for :title, "Product Catalog" %>
+
+<h1 id="catalog-heading">Product Catalog</h1>
+
+<%= form_with url: root_path, method: :get, class: "search-form" do |form| %>
+  <%= form.search_field :query, value: @query, placeholder: "Search products..." %>
+  <%= form.select :sort, options_for_select(
+        [ [ "Name (A-Z)", "name" ],
+          [ "Price (low to high)", "price_low" ],
+          [ "Price (high to low)", "price_high" ] ], @sort) %>
+  <%= form.submit "Search" %>
+  <% if @query.present? %>
+    <%= link_to "Clear", root_path %>
+  <% end %>
+<% end %>
+
+<% if @query.present? %>
+  <p class="search-summary"><%= pluralize(@products.size, "result") %> for "<%= @query %>"</p>
+<% end %>
+
+<div id="products">
+  <% if @products.empty? %>
+    <p class="no-reviews">No products found.</p>
+  <% end %>
+  <% @products.each do |product| %>
+    <div class="entry">
+      <%= image_tag(product.image, class: "product-image") %>
+      <h2><%= link_to product.name, product %></h2>
+      <p class="catalog-rating">
+        <% if product.average_rating %>
+          <span class="stars"><%= "★" * product.average_rating.round %><%= "☆" * (5 - product.average_rating.round) %></span>
+          <%= product.average_rating %> (<%= pluralize(product.reviews.size, "review") %>)
+        <% else %>
+          <span class="no-rating">No reviews yet</span>
+        <% end %>
+      </p>
+      <p><%= product.description %></p>
+      <div class="price-line">
+        <span class="price"><%= product.price %></span>
+        <%= button_to "Add to Cart", cartitems_path(product_id: product.id) %>
+        <%= render "favorites/button", product: product %>
+      </div>
+    </div>
+  <% end %>
+</div>

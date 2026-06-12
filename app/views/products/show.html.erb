@@ -1,0 +1,71 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @product %>
+
+<div class="product-actions">
+  <%= button_to "Add to Cart", cartitems_path(product_id: @product.id) %>
+  <%= render "favorites/button", product: @product %>
+</div>
+
+<% if admin? %>
+  <div class="admin-actions">
+    <%= link_to "Edit this product", edit_product_path(@product) %> |
+    <%= link_to "Back to products", products_path %>
+
+    <%= button_to "Destroy this product", @product, method: :delete %>
+  </div>
+<% end %>
+
+<section id="reviews">
+  <h2>
+    Reviews
+    <% if @product.average_rating %>
+      <span class="avg-rating"><%= @product.average_rating %> / 5 (<%= @reviews.size %>)</span>
+    <% end %>
+  </h2>
+
+  <% if @reviews.any? %>
+    <ul class="review-list">
+      <% @reviews.each do |review| %>
+        <li class="review">
+          <div class="review-head">
+            <span class="review-author"><%= review.user.username %></span>
+            <span class="review-stars"><%= "★" * review.rating %><%= "☆" * (5 - review.rating) %></span>
+          </div>
+          <p class="review-comment"><%= review.comment %></p>
+          <% if current_user && review.user == current_user %>
+            <div class="review-actions">
+              <%= link_to "Edit", edit_review_path(review) %> |
+              <%= button_to "Delete", review_path(review), method: :delete, form: { style: "display:inline" } %>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="no-reviews">No reviews yet.</p>
+  <% end %>
+
+  <% if logged_in? %>
+    <% if @user_review %>
+      <p class="already-reviewed">You've already reviewed this product. You can edit your review above.</p>
+    <% else %>
+      <h3>Write a review</h3>
+      <%= form_with model: [ @product, @new_review ] do |form| %>
+        <div>
+          <%= form.label :rating %><br>
+          <%= form.select :rating, (1..5).to_a, prompt: "Select a rating" %>
+        </div>
+        <div>
+          <%= form.label :comment %><br>
+          <%= form.text_area :comment, rows: 4 %>
+        </div>
+        <div>
+          <%= form.submit "Submit review" %>
+        </div>
+      <% end %>
+    <% end %>
+  <% else %>
+    <p class="login-to-review"><%= link_to "Log in", login_path %> to write a review.</p>
+  <% end %>
+</section>
