@@ -48,11 +48,11 @@ Validation:
 bundle install
 
 ### 2. Setup the database.
-rails db:migrate
-brails db:seed
+bin/rails db:migrate
+bin/rails db:seed
 
 ### 3. Start the server
-rails server
+bin/rails server
 
 Then open http://localhost:3000 in the browser.
 
